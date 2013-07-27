@@ -415,14 +415,51 @@ def WriteFullOTAPackage(input_zip, output_zip):
   if OPTIONS.wipe_user_data:
     script.FormatPartition("/data")
 
+  script.ShowProgress(0.5, 0)
+  script.Print("")
+  script.Print("")
+  script.Print("          ____________ _____ ___________  ")
+  script.Print("          |  _  \ ___ \  _  |_   _|  _  \ ")
+  script.Print("          | | | | |_/ / | | | | | | | | | ")
+  script.Print("          | | | |    /| | | | | | | | | | ")
+  script.Print("          | |/ /| |\ \| \_/ /_| |_| |/ /  ")
+  script.Print("          |___/ \_| \_|\___/ \___/|___/   ")
+  script.Print("")                                               
+  script.Print(" _____ _____ _   _ _____  ___________ _____ _____  ")
+  script.Print("/  __ \  _  | \ | /  __ \|  ___| ___ \_   _/  ___| ")
+  script.Print("| /  \/ | | |  \| | /  \/| |__ | |_/ / | | \ `--.  ")
+  script.Print("| |   | | | | . ` | |    |  __||  __/  | |  `--. \ ")  
+  script.Print("| \__/\ \_/ / |\  | \__/\| |___| |     | | /\__/ / ")
+  script.Print(" \____/\___/\_| \_/\____/\____/\_|     \_/ \____/  ")
+  script.Print("")
+  script.Print("      ___  _____ ___________     ___   _____  ")
+  script.Print("     / _ \|  _  /  ___| ___ \   /   | |____ | ")
+  script.Print("    / /_\ \ | | \ `--.| |_/ /  / /| |     / / ")
+  script.Print("    |  _  | | | |`--. \  __/  / /_| |     \ \ ")
+  script.Print("    | | | \ \_/ /\__/ / |     \___  |_.___/ / ")
+  script.Print("    \_| |_/\___/\____/\_|         |_(_)____/  ")
+  script.Print("")
+  script.Print("")
+  script.Print("<<< Brought to you by the Droid Concepts >>>")
+  script.Print("          <<< Development Team >>>")
+  script.Print("")
+  script.Print("{x}...Formatting system partition...")
+  script.Print("")
+
   if "selinux_fc" in OPTIONS.info_dict:
     WritePolicyConfig(OPTIONS.info_dict["selinux_fc"], output_zip)
 
   script.FormatPartition("/system")
   script.Mount("/system")
-  #script.UnpackPackageDir("recovery", "/system")
+  script.ShowProgress(0.5, 40)
+  script.Print("{x}...Installing System...")
+  script.Print("")
   script.UnpackPackageDir("system", "/system")
 
+  script.Print("{x}...Creating Symlinks...")
+  script.Print("")
+  script.Print("{x}...Setting Permissions...")
+  script.Print("")
   symlinks = CopySystemFiles(input_zip, output_zip)
   script.MakeSymlinks(symlinks)
 
@@ -441,12 +478,18 @@ def WriteFullOTAPackage(input_zip, output_zip):
 
   if OPTIONS.backuptool:
     script.ShowProgress(0.2, 10)
+    script.Print("{x}...Restoring Backed Up Files...")
+    script.Print("")
     script.RunBackup("restore")
 
   script.ShowProgress(0.2, 10)
+  script.Print("{x}...Flashing Kernel...")
+  script.Print("")
   script.WriteRawImage("/boot", "boot.img")
 
   script.ShowProgress(0.1, 0)
+  script.Print("{x}...Installation Complete!")
+  script.Print("")
   device_specific.FullOTA_InstallEnd()
 
   if OPTIONS.extra_script is not None:
