@@ -1397,17 +1397,16 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(DISTTOOLS)
 	   --override_device=$(override_device) \
 	   $(BUILT_TARGET_FILES_PACKAGE) $@
 
-DC_TARGET_PACKAGE := $(PRODUCT_OUT)/dc-$(DC_VERSION).zip
-
-.PHONY: otapackage droid_concepts
+.PHONY: otapackage dc
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
-droid_concepts: otapackage
+dc: otapackage
 ifneq ($(TARGET_CUSTOM_RELEASETOOL),)
-	$(error TARGET_CUSTOM_RELEASETOOL is deprecated)
+	@echo -e ${CL_YLW}"Running custom releasetool..."${CL_RST}
+	$(hide) OTAPACKAGE=$(INTERNAL_OTA_PACKAGE_TARGET) APKCERTS=$(APKCERTS_FILE) $(TARGET_CUSTOM_RELEASETOOL)
+else
+	@echo -e ${CL_YLW}"Running releasetool..."${CL_RST}
+	$(hide) OTAPACKAGE=$(INTERNAL_OTA_PACKAGE_TARGET) APKCERTS=$(APKCERTS_FILE) ./vendor/Droid_Concepts/tools/squisher
 endif
-	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(DC_TARGET_PACKAGE)
-	$(hide) $(MD5SUM) $(DC_TARGET_PACKAGE) > $(DC_TARGET_PACKAGE).md5sum
-	@echo -e ${CL_CYN}"Package Complete: $(DC_TARGET_PACKAGE)"${CL_RST}
 
 # -----------------------------------------------------------------
 # The update package
