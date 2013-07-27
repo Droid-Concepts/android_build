@@ -42,6 +42,6 @@ echo "ro.build.description=$PRIVATE_BUILD_DESC"
 echo "ro.build.fingerprint=$BUILD_FINGERPRINT"
 echo "ro.build.characteristics=$TARGET_AAPT_CHARACTERISTICS"
 
-echo "ro.dc.device=$dc_DEVICE"
+echo "ro.dc.device=$DC_DEVICE"
 
 echo "# end build properties"
