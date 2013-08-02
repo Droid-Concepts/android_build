@@ -71,7 +71,7 @@ def add_auth(githubreq):
 
 page = 1
 while not depsonly:
-    githubreq = urllib.request.Request("https://api.github.com/users/CyanogenMod/repos?per_page=200&page=%d" % page)
+    githubreq = urllib.request.Request("https://api.github.com/users/CyanogenMod/repos?per_page=100&page=%d" % page)
     add_auth(githubreq)
     result = json.loads(urllib.request.urlopen(githubreq).read().decode())
     if len(result) == 0:
@@ -138,17 +138,6 @@ def get_from_manifest(devicename):
 def is_in_manifest(projectname):
     try:
         lm = ElementTree.parse(".repo/local_manifests/roomservice.xml")
-        lm = lm.getroot()
-    except:
-        lm = ElementTree.Element("manifest")
-
-    for localpath in lm.findall("project"):
-        if localpath.get("name") == projectname:
-            return 1
-
-    ## Search in main manifest, too
-    try:
-        lm = ElementTree.parse(".repo/manifest.xml")
         lm = lm.getroot()
     except:
         lm = ElementTree.Element("manifest")
