@@ -439,14 +439,13 @@ function add_lunch_combo()
 function print_lunch_menu()
 {
     clear
-    echo
     echo ""
     echo ""
     echo "    ______  _____      ___   _____  "
     echo "    |  _  \/  __ \    /   | |____ | "
     echo "    | | | || /  \/   / /| |     / / "
     echo "    | | | || |      / /_| |     \ \ "
-‎    echo "    | |/ / | \__/\  \___  |_.___/ / "
+    echo "    | |/ / | \__/\  \___  |_.___/ / "
     echo "    |___/   \____/      |_(_)____/  "
     echo ""
     echo ""
@@ -455,6 +454,8 @@ function print_lunch_menu()
     echo "   <<<< DROID CONCEPTS AOSP 4.3 >>>>"
     echo ""
     echo "Make your selection from the list below "
+    echo ""
+    echo ""
 
     local i=1
     local choice
