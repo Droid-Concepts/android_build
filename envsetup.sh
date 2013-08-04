@@ -455,7 +455,6 @@ function print_lunch_menu()
     echo "   <<<< DROID CONCEPTS AOSP 4.3 >>>>"
     echo ""
     echo "Make your selection from the list below "
-    fi
 
     local i=1
     local choice
