@@ -438,14 +438,23 @@ function add_lunch_combo()
 
 function print_lunch_menu()
 {
-    local uname=$(uname)
+    clear
     echo
-    echo "You're building on"
+    echo ""
+    echo ""
+    echo "    ______  _____      ___   _____  "
+    echo "    |  _  \/  __ \    /   | |____ | "
+    echo "    | | | || /  \/   / /| |     / / "
+    echo "    | | | || |      / /_| |     \ \ "
+‎    echo "    | |/ / | \__/\  \___  |_.___/ / "
+    echo "    |___/   \____/      |_(_)____/  "
+    echo ""
+    echo ""
+
     echo
-    if [ "z${DC_DEVICES_ONLY}" != "z" ]; then
-       echo "Breakfast menu... pick a combo:"
-    else
-       echo "Lunch menu... pick a combo:"
+    echo "   <<<< DROID CONCEPTS AOSP 4.3 >>>>"
+    echo ""
+    echo "Make your selection from the list below "
     fi
 
     local i=1
@@ -455,10 +464,6 @@ function print_lunch_menu()
         echo " $i. $choice "
         i=$(($i+1))
     done | column
-
-    if [ "z${DC_DEVICES_ONLY}" != "z" ]; then
-       echo "... and don't forget the bacon!"
-    fi
 
     echo
 }
@@ -514,7 +519,7 @@ function lunch()
         answer=$1
     else
         print_lunch_menu
-        echo -n "Which would you like? [aosp_arm-eng] "
+        echo -n "Enter your selection and let's build this shit:"
         read answer
     fi
 
@@ -537,7 +542,7 @@ function lunch()
     if [ -z "$selection" ]
     then
         echo
-        echo "Invalid lunch combo: $answer"
+        echo "Invalid DC combo: $answer"
         return 1
     fi
 
