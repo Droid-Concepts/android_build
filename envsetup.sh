@@ -261,31 +261,6 @@ function settitle()
     fi
 }
 
-function addcompletions()
-{
-    # Keep us from trying to run in something that isn't bash.
-    if [ -z "${BASH_VERSION}" ]; then
-        return
-    fi
-
-    # Keep us from trying to run in bash that's too old.
-    if [ "${BASH_VERSINFO[0]}" -lt 4 ] ; then
-        return
-    fi
-
-    local T dir f
-
-    dirs="sdk/bash_completion vendor/Droid_Concepts/bash_completion"
-    for dir in $dirs; do
-    if [ -d ${dir} ]; then
-        for f in `/bin/ls ${dir}/[a-z]*.bash 2> /dev/null`; do
-            echo "including $f"
-            . $f
-        done
-    fi
-    done
-}
-
 function choosetype()
 {
     echo "Build type choices are:"
@@ -461,20 +436,11 @@ function add_lunch_combo()
     LUNCH_MENU_CHOICES=(${LUNCH_MENU_CHOICES[@]} $new_combo)
 }
 
-# add the default one here
-add_lunch_combo aosp_arm-eng
-add_lunch_combo aosp_x86-eng
-add_lunch_combo aosp_mips-eng
-add_lunch_combo vbox_x86-eng
-
 function print_lunch_menu()
 {
     local uname=$(uname)
     echo
-    echo "You're building on" $uname
-    if [ "$(uname)" = "Darwin" ] ; then
-       echo "  (ohai, koush!)"
-    fi
+    echo "You're building on"
     echo
     if [ "z${DC_DEVICES_ONLY}" != "z" ]; then
        echo "Breakfast menu... pick a combo:"
@@ -1999,14 +1965,12 @@ if [ "x$SHELL" != "x/bin/bash" ]; then
 fi
 
 # Execute the contents of any vendorsetup.sh files we can find.
-for f in `/bin/ls vendor/*/vendorsetup.sh vendor/*/*/vendorsetup.sh device/*/*/vendorsetup.sh 2> /dev/null`
+for f in `/bin/ls vendor/Droid_Concepts/vendorsetup.sh 2> /dev/null`
 
 do
     echo "including $f"
     . $f
 done
 unset f
-
-addcompletions
 
 export ANDROID_BUILD_TOP=$(gettop)
