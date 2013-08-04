@@ -439,6 +439,8 @@ function add_lunch_combo()
 function print_lunch_menu()
 {
     clear
+
+    echo
     echo ""
     echo ""
     echo "    ______  _____      ___   _____  "
