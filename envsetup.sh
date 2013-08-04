@@ -463,9 +463,9 @@ function print_lunch_menu()
     local choice
     for choice in ${LUNCH_MENU_CHOICES[@]}
     do
-        echo " $i. $choice "
+        echo "     $i. $choice"
         i=$(($i+1))
-    done | column
+    done
 
     echo
 }
@@ -521,7 +521,8 @@ function lunch()
         answer=$1
     else
         print_lunch_menu
-        echo -n "Enter your selection and let's build this shit:"
+        echo ""
+        echo -n "Enter your selection and let's build this shit: "
         read answer
     fi
 
