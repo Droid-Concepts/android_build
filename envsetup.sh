@@ -38,6 +38,14 @@ EOF
     echo $A
 }
 
+CL_RED="\033[31m"
+CL_GRN="\033[32m"
+CL_YLW="\033[33m"
+CL_BLU="\033[34m"
+CL_MAG="\033[35m"
+CL_CYN="\033[36m"
+CL_RST="\033[0m"
+
 # Get the value of a build variable as an absolute path.
 function get_abs_build_var()
 {
@@ -443,19 +451,19 @@ function print_lunch_menu()
     echo
     echo ""
     echo ""
-    echo "    ______  _____      ___   _____  "
-    echo "    |  _  \/  __ \    /   | |____ | "
-    echo "    | | | || /  \/   / /| |     / / "
-    echo "    | | | || |      / /_| |     \ \ "
-    echo "    | |/ / | \__/\  \___  |_.___/ / "
-    echo "    |___/   \____/      |_(_)____/  "
+    echo -e ${CL_CYN}"    ______  _____      ___   _____  "
+    echo -e ${CL_CYN}"    |  _  \/  __ \    /   | |____ | "
+    echo -e ${CL_CYN}"    | | | || /  \/   / /| |     / / "
+    echo -e ${CL_CYN}"    | | | || |      / /_| |     \ \ "
+    echo -e ${CL_CYN}"    | |/ / | \__/\  \___  |_.___/ / "
+    echo -e ${CL_CYN}"    |___/   \____/      |_(_)____/  "
     echo ""
     echo ""
 
     echo
-    echo "   <<<< DROID CONCEPTS AOSP 4.3 >>>>"
+    echo -e ${CL_RST}"   <<<< DROID CONCEPTS AOSP 4.3 >>>>"
     echo ""
-    echo "Make your selection from the list below "
+    echo -e ${CL_RST}"Make your selection from the list below "
     echo ""
     echo ""
 
@@ -463,11 +471,11 @@ function print_lunch_menu()
     local choice
     for choice in ${LUNCH_MENU_CHOICES[@]}
     do
-        echo "     $i. $choice"
+        echo -e ${CL_BLU}"     $i. $choice"
         i=$(($i+1))
     done
 
-    echo
+    echo -e ${CL_RST}
 }
 
 function brunch()
@@ -545,7 +553,8 @@ function lunch()
     if [ -z "$selection" ]
     then
         echo
-        echo "Invalid DC combo: $answer"
+        echo -e ${CL_RED}"Invalid DC combo: $answer"
+        echo -e ${CL_RST}
         return 1
     fi
 
