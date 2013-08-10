@@ -278,7 +278,7 @@ function choosetype()
 
     local DEFAULT_NUM DEFAULT_VALUE
     DEFAULT_NUM=1
-    DEFAULT_VALUE=release
+    DEFAULT_VALUE=debug
 
     export TARGET_BUILD_TYPE=
     local ANSWER
@@ -452,18 +452,18 @@ function print_lunch_menu()
     echo ""
     echo ""
     echo -e ${CL_CYN}"    ______  _____      ___   _____  "
-    echo -e ${CL_CYN}"    |  _  \/  __ \    /   | |____ | "
-    echo -e ${CL_CYN}"    | | | || /  \/   / /| |     / / "
-    echo -e ${CL_CYN}"    | | | || |      / /_| |     \ \ "
-    echo -e ${CL_CYN}"    | |/ / | \__/\  \___  |_.___/ / "
-    echo -e ${CL_CYN}"    |___/   \____/      |_(_)____/  "
+    echo -e "    |  _  \/  __ \    /   | |____ | "
+    echo -e "    | | | || /  \/   / /| |     / / "
+    echo -e "    | | | || |      / /_| |     \ \ "
+    echo -e "    | |/ / | \__/\  \___  |_.___/ / "
+    echo -e "    |___/   \____/      |_(_)____/  "${CL_RST}
     echo ""
     echo ""
 
     echo
-    echo -e ${CL_RST}"   <<<< DROID CONCEPTS AOSP 4.3 >>>>"
+    echo -e ${CL_BLU}"   <<<< DROID CONCEPTS AOSP 4.3 >>>>"${CL_RST}
     echo ""
-    echo -e ${CL_RST}"Make your selection from the list below "
+    echo "Make your selection from the list below "
     echo ""
     echo ""
 
@@ -471,7 +471,7 @@ function print_lunch_menu()
     local choice
     for choice in ${LUNCH_MENU_CHOICES[@]}
     do
-        echo -e ${CL_BLU}"     $i. $choice"
+        echo -e ${CL_CYN}"     $i. $choice"
         i=$(($i+1))
     done
 
@@ -484,7 +484,7 @@ function brunch()
     if [ $? -eq 0 ]; then
         mka droid_concepts
     else
-        echo "No such item in brunch menu. Try 'breakfast'"
+        echo -e ${CL_RED}"No such item in brunch menu. Try 'breakfast'"${CL_RST}
         return 1
     fi
     return $?
@@ -553,8 +553,8 @@ function lunch()
     if [ -z "$selection" ]
     then
         echo
-        echo -e ${CL_RED}"Invalid DC combo: $answer"
-        echo -e ${CL_RST}
+        echo -e ${CL_RED}"Invalid DC combo: $answer"${CL_RST}
+        echo
         return 1
     fi
 
@@ -565,8 +565,8 @@ function lunch()
     if [ $? -ne 0 ]
     then
         echo
-        echo "** Don't have a product spec for: '$product'"
-        echo "** Do you have the right repo manifest?"
+        echo -e ${CL_RED}"** Don't have a product spec for: '$product'"
+        echo -e"** Do you have the right repo manifest?"${CL_RST}
         product=
     fi
 
@@ -575,8 +575,8 @@ function lunch()
     if [ $? -ne 0 ]
     then
         echo
-        echo "** Invalid variant: '$variant'"
-        echo "** Must be one of ${VARIANT_CHOICES[@]}"
+        echo -e ${CL_RED}"** Invalid variant: '$variant'"
+        echo -e"** Must be one of ${VARIANT_CHOICES[@]}"${CL_RST}
         variant=
     fi
 
@@ -588,7 +588,7 @@ function lunch()
 
     export TARGET_PRODUCT=$product
     export TARGET_BUILD_VARIANT=$variant
-    export TARGET_BUILD_TYPE=release
+    export TARGET_BUILD_TYPE=debug
 
     echo
 
