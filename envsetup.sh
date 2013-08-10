@@ -278,7 +278,7 @@ function choosetype()
 
     local DEFAULT_NUM DEFAULT_VALUE
     DEFAULT_NUM=1
-    DEFAULT_VALUE=debug
+    DEFAULT_VALUE=release
 
     export TARGET_BUILD_TYPE=
     local ANSWER
@@ -588,7 +588,7 @@ function lunch()
 
     export TARGET_PRODUCT=$product
     export TARGET_BUILD_VARIANT=$variant
-    export TARGET_BUILD_TYPE=debug
+    export TARGET_BUILD_TYPE=release
 
     echo
 
