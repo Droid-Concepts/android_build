@@ -482,7 +482,7 @@ function brunch()
 {
     breakfast $*
     if [ $? -eq 0 ]; then
-        mka droid_concepts
+        mka demented
     else
         echo -e ${CL_RED}"No such item in brunch menu. Try 'breakfast'"${CL_RST}
         return 1
@@ -494,6 +494,7 @@ function breakfast()
 {
     target=$1
     DEMENTED_DEVICES_ONLY="true"
+    add_lunch_combo full-eng
     unset LUNCH_MENU_CHOICES
     for f in `/bin/ls vendor/DEMENTED/vendorsetup.sh 2> /dev/null`
         do
@@ -1987,7 +1988,7 @@ if [ "x$SHELL" != "x/bin/bash" ]; then
 fi
 
 # Execute the contents of any vendorsetup.sh files we can find.
-for f in `/bin/ls vendor/Droid_Concepts/vendorsetup.sh 2> /dev/null`
+for f in `/bin/ls vendor/DEMENTED/vendorsetup.sh 2> /dev/null`
 
 do
     echo "including $f"
