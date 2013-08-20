@@ -79,12 +79,12 @@ function check_product()
         return
     fi
 
-    if (echo -n $1 | grep -q -e "^dc_") ; then
-       DC_BUILD=$(echo -n $1 | sed -e 's/^dc_//g')
+    if (echo -n $1 | grep -q -e "^demented_") ; then
+       DEMENTED_BUILD=$(echo -n $1 | sed -e 's/^demented_//g')
     else
-       DC_BUILD=
+       DEMENTED_BUILD=
     fi
-    export DC_BUILD
+    export DEMENTED_BUILD
 
     CALLED_FROM_SETUP=true BUILD_SYSTEM=build/core \
         TARGET_PRODUCT=$1 \
@@ -451,17 +451,17 @@ function print_lunch_menu()
     echo
     echo ""
     echo ""
-    echo -e ${CL_CYN}"    ______  _____      ___   _____  "
-    echo -e "    |  _  \/  __ \    /   | |____ | "
-    echo -e "    | | | || /  \/   / /| |     / / "
-    echo -e "    | | | || |      / /_| |     \ \ "
-    echo -e "    | |/ / | \__/\  \___  |_.___/ / "
-    echo -e "    |___/   \____/      |_(_)____/  "${CL_RST}
+    echo -e ${CL_CYN}"    ___ _____ __  __  _____ _   _ _____ _____ ___  "
+    echo -e "    | _ \  ___|  \/  ||  ___| \ | |_   _|  ___| _ \ "
+    echo -e "    || || |__ | .  . || |__ |  \| | | | | |__ || || "
+    echo -e "    || ||  __|| |\/| ||  __|| . | | | | |  __||| || "
+    echo -e "    ||//| |___| |  | || |___| |\  | | | | |___||// "
+    echo -e "    |_/ \____/\_|  |_/\____/\_| \_/ \_/ \____/|_/  "${CL_RST}
     echo ""
     echo ""
 
     echo
-    echo -e ${CL_BLU}"   <<<< DROID CONCEPTS AOSP 4.3 >>>>"${CL_RST}
+    echo -e ${CL_BLU}"   <<<< DEMENTED DROID AOSP 4.3 >>>>"${CL_RST}
     echo ""
     echo "Make your selection from the list below "
     echo ""
@@ -493,10 +493,9 @@ function brunch()
 function breakfast()
 {
     target=$1
-    DC_DEVICES_ONLY="true"
+    DEMENTED_DEVICES_ONLY="true"
     unset LUNCH_MENU_CHOICES
-    add_lunch_combo full-eng
-    for f in `/bin/ls vendor/Droid_Concepts/vendorsetup.sh 2> /dev/null`
+    for f in `/bin/ls vendor/DEMENTED/vendorsetup.sh 2> /dev/null`
         do
             echo "including $f"
             . $f
@@ -512,8 +511,8 @@ function breakfast()
             # A buildtype was specified, assume a full device name
             lunch $target
         else
-            # This is probably just the DC model name
-            lunch dc_$target-userdebug
+            # This is probably just the DEMENTED model name
+            lunch demented_$target-userdebug
         fi
     fi
     return $?
@@ -553,7 +552,7 @@ function lunch()
     if [ -z "$selection" ]
     then
         echo
-        echo -e ${CL_RED}"Invalid DC combo: $answer"${CL_RST}
+        echo -e ${CL_RED}"Invalid DEMENTED combo: $answer"${CL_RST}
         echo
         return 1
     fi
@@ -653,8 +652,8 @@ function tapas()
 function eat()
 {
     if [ "$OUT" ] ; then
-        MODVERSION=$(get_build_var DC_VERSION)
-        ZIPFILE=Droid_Concepts-$MODVERSION.zip
+        MODVERSION=$(get_build_var DEMENTED_VERSION)
+        ZIPFILE=DEMENTED-$MODVERSION.zip
         ZIPPATH=$OUT/$ZIPFILE
         if [ ! -f $ZIPPATH ] ; then
             echo "Nothing to eat"
@@ -669,7 +668,7 @@ function eat()
             done
             echo "Device Found.."
         fi
-    if (adb shell cat /system/build.prop | grep -q "ro.dc.device=$DC_BUILD");
+    if (adb shell cat /system/build.prop | grep -q "ro.demented.device=$DEMENTED_BUILD");
     then
         # if adbd isn't root we can't write to /cache/recovery/
         adb root
@@ -691,7 +690,7 @@ EOF
     fi
     return $?
     else
-        echo "The connected device does not appear to be $DC_BUILD, run away!"
+        echo "The connected device does not appear to be $DEMENTED_BUILD, run away!"
     fi
 }
 
@@ -1452,7 +1451,7 @@ function installboot()
     sleep 1
     adb wait-for-online shell mount /system 2>&1 > /dev/null
     adb wait-for-online remount
-    if (adb shell cat /system/build.prop | grep -q "ro.dc.device=$DC_BUILD");
+    if (adb shell cat /system/build.prop | grep -q "ro.demented.device=$demented_BUILD");
     then
         adb push $OUT/boot.img /cache/
         for i in $OUT/system/lib/modules/*;
@@ -1468,7 +1467,7 @@ function installboot()
         adb shell chmod 644 /system/lib/modules/*
         echo "Installation complete."
     else
-        echo "The connected device does not appear to be $DC_BUILD, run away!"
+        echo "The connected device does not appear to be $DEMENTED_BUILD, run away!"
     fi
 }
 
@@ -1501,13 +1500,13 @@ function installrecovery()
     sleep 1
     adb wait-for-online shell mount /system 2>&1 >> /dev/null
     adb wait-for-online remount
-    if (adb shell cat /system/build.prop | grep -q "ro.dc.device=$DC_BUILD");
+    if (adb shell cat /system/build.prop | grep -q "ro.demented.device=$DEMENTED_BUILD");
     then
         adb push $OUT/recovery.img /cache/
         adb shell dd if=/cache/recovery.img of=$PARTITION
         echo "Installation complete."
     else
-        echo "The connected device does not appear to be $DC_BUILD, run away!"
+        echo "The connected device does not appear to be $DEMENTED_BUILD, run away!"
     fi
 }
 
@@ -1881,7 +1880,7 @@ function dopush()
         echo "Device Found."
     fi
 
-    if (adb shell cat /system/build.prop | grep -q "ro.dc.device=$DC_BUILD");
+    if (adb shell cat /system/build.prop | grep -q "ro.demented.device=$DEMENTED_BUILD");
     then
     adb root &> /dev/null
     sleep 0.3
@@ -1923,7 +1922,7 @@ function dopush()
     rm -f $OUT/.log
     return 0
     else
-        echo "The connected device does not appear to be $DC_BUILD, run away!"
+        echo "The connected device does not appear to be $DEMENTED_BUILD, run away!"
     fi
 }
 
