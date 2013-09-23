@@ -340,7 +340,7 @@ ifeq (true,$(strip $(enable_target_debugging)))
 else # !enable_target_debugging
   # Target is less debuggable and adbd is off by default
   ADDITIONAL_DEFAULT_PROPERTIES += ro.debuggable=1
-    INCLUDE_TEST_OTA_KEYS := true
+  INCLUDE_TEST_OTA_KEYS := true
 endif # !enable_target_debugging
 
 ## eng ##
