@@ -793,7 +793,7 @@ function mm()
               MODULES=all_modules
               ARGS=$@
             fi
-            ONE_SHOT_MAKEFILE=$M make -C $T -f build/core/main.mk $MODULES $ARGS
+            ONE_SHOT_MAKEFILE=$M $MM_MAKE -C $T -f build/core/main.mk $MODULES $ARGS
         fi
     fi
 }
@@ -839,7 +839,7 @@ function mmm()
           ARGS=$GET_INSTALL_PATH
           MODULES=
         fi
-        ONE_SHOT_MAKEFILE="$MAKEFILE" make -C $T -f build/core/main.mk $DASH_ARGS $MODULES $ARGS
+        ONE_SHOT_MAKEFILE="$MAKEFILE" $MMM_MAKE -C $T -f build/core/main.mk $DASH_ARGS $MODULES $ARGS
     else
         echo "Couldn't locate the top of the tree.  Try setting TOP."
     fi

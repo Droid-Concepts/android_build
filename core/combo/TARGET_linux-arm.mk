@@ -95,6 +95,8 @@ endif
 
 android_config_h := $(call select-android-config-h,linux-arm)
 
+android_config_h := $(call select-android-config-h,linux-arm)
+
 TARGET_GLOBAL_CFLAGS += \
 			-msoft-float -fpic $(PIE_GLOBAL_CFLAGS) \
 			-ffunction-sections \

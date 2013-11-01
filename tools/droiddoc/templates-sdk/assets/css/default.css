@@ -2364,10 +2364,7 @@ div.toggle-content.closed .toggle-content-toggleme {
 #jd-content img.toggle-content-img {
   margin:0 5px 5px 0;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> remotes/aosp/kitkat-release
 div.toggle-content-toggleme {
   padding:0 0 0 15px;
 }
@@ -2661,10 +2658,14 @@ table.blank th, table.blank td {
   margin: 0.5em 0 2em 0;
   color: #000;
 <<<<<<< HEAD
+<<<<<<< HEAD
   font-size: 11.5px;
 =======
   font-size: 11.5px; 
 >>>>>>> remotes/aosp/kitkat-release
+=======
+  font-size: 11.5px; 
+>>>>>>> 1356eca... Merge tag 'android-4.4_r1' into cm-11.0
 }
 
 .nolist, .nolist ul, .nolist ol {

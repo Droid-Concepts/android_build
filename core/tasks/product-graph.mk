@@ -70,7 +70,7 @@ $(products_graph): PRIVATE_PRODUCTS := $(really_all_products)
 $(products_graph): PRIVATE_PRODUCTS_FILTER := $(products_list)
 
 $(products_graph): $(this_makefile)
-	@echo Product graph DOT: $@ for $(PRIVATE_PRODUCTS_FILTER)
+	@echo Product graph DOT:"${CL_RST}" $@ for $(PRIVATE_PRODUCTS_FILTER)
 	$(hide) echo 'digraph {' > $@.in
 	$(hide) echo 'graph [ ratio=.5 ];' >> $@.in
 	$(hide) $(foreach p,$(PRIVATE_PRODUCTS), \
