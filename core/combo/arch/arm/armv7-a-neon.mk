@@ -9,8 +9,8 @@ ARCH_ARM_HAVE_NEON              := true
 ifeq ($(strip $(TARGET_CPU_VARIANT)), cortex-a15)
 	arch_variant_cflags := -mcpu=cortex-a15
 else
-ifeq ($(strip $(TARGET_CPU_VARIANT)),cortex-a9)
-	arch_variant_cflags := -mcpu=cortex-a9
+ifeq ($(strip $(TARGET_CPU_VARIANT)),cortex-a8)
+	arch_variant_cflags := -mcpu=cortex-a8
 else
 ifeq ($(strip $(TARGET_CPU_VARIANT)),cortex-a7)
 	arch_variant_cflags := -mcpu=cortex-a7
@@ -25,9 +25,6 @@ else
 endif
 endif
 endif
-endif
-endif
-
 arch_variant_cflags += \
     -mfloat-abi=softfp \
     -mfpu=neon
