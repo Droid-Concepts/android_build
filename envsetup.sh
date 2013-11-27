@@ -1449,19 +1449,28 @@ function cmremote()
     GERRIT_REMOTE=$(cat .git/config  | grep git://github.com | awk '{ print $NF }' | sed s#git://github.com/##g)
     if [ -z "$GERRIT_REMOTE" ]
     then
-        GERRIT_REMOTE=$(cat .git/config  | grep http://github.com | awk '{ print $NF }' | sed s#http://github.com/##g)
+        GERRIT_REMOTE=$(cat .git/config  | grep https://github.com | awk '{ print $NF }' | sed s#https://github.com/##g)
         if [ -z "$GERRIT_REMOTE" ]
         then
           echo Unable to set up the git remote, are you in the root of the repo?
           return 0
         fi
     fi
+<<<<<<< HEAD
     CMUSER=`git config --get review.review.cyanogenmod.org.username`
     if [ -z "$CMUSER" ]
     then
         git remote add cmremote ssh://review.cyanogenmod.org:29418/$GERRIT_REMOTE
     else
         git remote add cmremote ssh://$CMUSER@review.cyanogenmod.org:29418/$GERRIT_REMOTE
+=======
+    TGUSER=`git config --get review.gummyrom.com.username`
+    if [ -z "$TGUSER" ]
+    then
+        git remote add tgremote ssh://review.gummyrom.com:29418/$GERRIT_REMOTE
+    else
+        git remote add tgremote ssh://$TGUSER@review.gummyrom.com:29418/$GERRIT_REMOTE
+>>>>>>> 8f8cb9d... envsetup: Fix tgremote
     fi
     echo You can now push to "cmremote".
 }
@@ -1607,7 +1616,11 @@ function cmgerrit() {
         $FUNCNAME help
         return 1
     fi
+<<<<<<< HEAD
     local user=`git config --get review.review.cyanogenmod.org.username`
+=======
+    local user=`git config --get review.gummyrom.com.username`
+>>>>>>> 8f8cb9d... envsetup: Fix tgremote
     local review=`git config --get remote.github.review`
     local project=`git config --get remote.github.projectname`
     local command=$1
@@ -1864,7 +1877,7 @@ function cmrebase() {
     echo "Bringing it up to date..."
     repo sync .
     echo "Fetching change..."
-    git fetch "http://review.cyanogenmod.org/p/$repo" "refs/changes/$refs" && git cherry-pick FETCH_HEAD
+    git fetch "http://review.gummyrom.com/p/$repo" "refs/changes/$refs" && git cherry-pick FETCH_HEAD
     if [ "$?" != "0" ]; then
         echo "Error cherry-picking. Not uploading!"
         return
