@@ -1456,21 +1456,12 @@ function cmremote()
           return 0
         fi
     fi
-<<<<<<< HEAD
-    CMUSER=`git config --get review.review.cyanogenmod.org.username`
-    if [ -z "$CMUSER" ]
-    then
-        git remote add cmremote ssh://review.cyanogenmod.org:29418/$GERRIT_REMOTE
-    else
-        git remote add cmremote ssh://$CMUSER@review.cyanogenmod.org:29418/$GERRIT_REMOTE
-=======
     TGUSER=`git config --get review.gummyrom.com.username`
     if [ -z "$TGUSER" ]
     then
         git remote add tgremote ssh://review.gummyrom.com:29418/$GERRIT_REMOTE
     else
         git remote add tgremote ssh://$TGUSER@review.gummyrom.com:29418/$GERRIT_REMOTE
->>>>>>> 8f8cb9d... envsetup: Fix tgremote
     fi
     echo You can now push to "cmremote".
 }
@@ -1616,11 +1607,7 @@ function cmgerrit() {
         $FUNCNAME help
         return 1
     fi
-<<<<<<< HEAD
-    local user=`git config --get review.review.cyanogenmod.org.username`
-=======
     local user=`git config --get review.gummyrom.com.username`
->>>>>>> 8f8cb9d... envsetup: Fix tgremote
     local review=`git config --get remote.github.review`
     local project=`git config --get remote.github.projectname`
     local command=$1
