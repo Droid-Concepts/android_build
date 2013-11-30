@@ -97,11 +97,7 @@ $(full_classes_compiled_jar): $(java_sources) $(java_resource_sources) $(full_ja
 ifneq ($(strip $(LOCAL_JARJAR_RULES)),)
 $(full_classes_jarjar_jar): PRIVATE_JARJAR_RULES := $(LOCAL_JARJAR_RULES)
 $(full_classes_jarjar_jar): $(full_classes_compiled_jar) $(LOCAL_JARJAR_RULES) | $(JARJAR)
-<<<<<<< HEAD
-	@echo JarJar: $@
-=======
 	@echo -e ${CL_YLW}"JarJar:"${CL_RST}" $@"
->>>>>>> 1356eca... Merge tag 'android-4.4_r1' into cm-11.0
 	$(hide) java -jar $(JARJAR) process $(PRIVATE_JARJAR_RULES) $< $@
 else
 $(full_classes_jarjar_jar): $(full_classes_compiled_jar) | $(ACP)
